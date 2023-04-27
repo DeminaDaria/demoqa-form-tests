@@ -1,1 +1,8 @@
-Hello! It is Student Registration Form for autotest  on the https://demoqa.com/ 
+On this repo used selenide for writing autotests on the https://demoqa.com/ Student Registration Form.
+Were used:
+*.setValue
+*.click
+*.findBy
+*.pressTab
+*.uploadFile
+
