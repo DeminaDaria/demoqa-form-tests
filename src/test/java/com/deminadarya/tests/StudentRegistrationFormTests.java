@@ -4,6 +4,8 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -36,6 +38,8 @@ public class StudentRegistrationFormTests {
         $("#currentAddress").setValue("test address living").click();
         $("#stateCity-wrapper #react-select-3-input").setValue("U").pressTab();
         $("#stateCity-wrapper #react-select-4-input").setValue("Mer").pressTab();
+        $("input#uploadPicture").uploadFile(new File("src/test/data/dog.jpg"));
         $("button#submit").click();
     }
+
 }
