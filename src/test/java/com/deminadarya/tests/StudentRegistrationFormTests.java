@@ -1,5 +1,6 @@
 package com.deminadarya.tests;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -40,6 +41,16 @@ public class StudentRegistrationFormTests {
         $("#stateCity-wrapper #react-select-4-input").setValue("Mer").pressTab();
         $("input#uploadPicture").uploadFile(new File("src/test/data/dog.jpg"));
         $("button#submit").click();
-    }
 
+        $$(".table-responsive tbody").shouldHave(CollectionCondition.texts("Frogy Wings"));
+        $$(".table-responsive tbody").shouldHave(CollectionCondition.texts("rog@test.com"));
+        $$(".table-responsive tbody").shouldHave(CollectionCondition.texts("Female"));
+        $$(".table-responsive tbody").shouldHave(CollectionCondition.texts("9874561230"));
+        $$(".table-responsive tbody").shouldHave(CollectionCondition.texts("14 November,1992"));
+        $$(".table-responsive tbody").shouldHave(CollectionCondition.texts("Biology"));
+        $$(".table-responsive tbody").shouldHave(CollectionCondition.texts("Sports, Reading, Music"));
+        $$(".table-responsive tbody").shouldHave(CollectionCondition.texts("dog.jpg"));
+        $$(".table-responsive tbody").shouldHave(CollectionCondition.texts("test address living"));
+        $$(".table-responsive tbody").shouldHave(CollectionCondition.texts("Uttar Pradesh Merrut"));
+    }
 }
