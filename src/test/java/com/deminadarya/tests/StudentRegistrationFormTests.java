@@ -1,13 +1,11 @@
 package com.deminadarya.tests;
 
-import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class StudentRegistrationFormTests {
@@ -24,33 +22,30 @@ public class StudentRegistrationFormTests {
         $("#firstName").setValue("Frogy");
         $("#lastName").setValue("Wings");
         $("#userEmail").setValue("rog@test.com");
-        $x("//*[@id='genterWrapper']/div[2]/div[2]").click();
+        $("#genterWrapper").$(byText("Male")).click();
         $("#userNumber").setValue("9874561230");
         $("input#dateOfBirthInput").click();
-        $("select.react-datepicker__month-select").click();
-        $$("select.react-datepicker__month-select option").findBy(text("November")).click();
-        $("select.react-datepicker__year-select").click();
-        $$("select.react-datepicker__year-select option").findBy(text("1992")).click();
-        $$("div.react-datepicker__week div.react-datepicker__day").findBy(text("14")).click();
-        $("#subjectsContainer #subjectsInput").setValue("biology").pressTab();
-        $$("label.custom-control-label").findBy(text("Sports")).click();
-        $$("label.custom-control-label").findBy(text("Reading")).click();
-        $$("label.custom-control-label").findBy(text("Music")).click();
+        $(".react-datepicker__month-select").selectOption("November");
+        $(".react-datepicker__year-select").selectOption("1992");
+        $$(".react-datepicker__week .react-datepicker__day").findBy(text("14")).click();
+        $("#subjectsInput").setValue("biology").pressTab();
+        $("#hobbiesWrapper").$(byText("Sports")).click();
+        $("#hobbiesWrapper").$(byText("Reading")).click();
+        $("#hobbiesWrapper").$(byText("Music")).click();
+        $("input#uploadPicture").uploadFromClasspath("imj/dog.jpg");
         $("#currentAddress").setValue("test address living").click();
-        $("#stateCity-wrapper #react-select-3-input").setValue("U").pressTab();
-        $("#stateCity-wrapper #react-select-4-input").setValue("Mer").pressTab();
-        $("input#uploadPicture").uploadFile(new File("src/test/data/dog.jpg"));
+        $("#state").click();
+        $("#stateCity-wrapper").$(byText("Uttar Pradesh")).click();
+        $("#react-select-4-input").setValue("Mer").pressTab();
         $("button#submit").click();
 
-        $$(".table-responsive tbody").shouldHave(CollectionCondition.texts("Frogy Wings"));
-        $$(".table-responsive tbody").shouldHave(CollectionCondition.texts("rog@test.com"));
-        $$(".table-responsive tbody").shouldHave(CollectionCondition.texts("Female"));
-        $$(".table-responsive tbody").shouldHave(CollectionCondition.texts("9874561230"));
-        $$(".table-responsive tbody").shouldHave(CollectionCondition.texts("14 November,1992"));
-        $$(".table-responsive tbody").shouldHave(CollectionCondition.texts("Biology"));
-        $$(".table-responsive tbody").shouldHave(CollectionCondition.texts("Sports, Reading, Music"));
-        $$(".table-responsive tbody").shouldHave(CollectionCondition.texts("dog.jpg"));
-        $$(".table-responsive tbody").shouldHave(CollectionCondition.texts("test address living"));
-        $$(".table-responsive tbody").shouldHave(CollectionCondition.texts("Uttar Pradesh Merrut"));
+        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
+        $(".table-responsive").shouldHave(text("Frogy Wings"));
+        $(".table-responsive").shouldHave(text("rog@test.com"), text("Male"), text("9874561230"), text("14 November,1992"));
+        $$(".table-responsive").findBy(text("Subjects")).shouldHave(text("Biology"));
+        $$(".table-responsive").findBy(text("Hobbies")).shouldHave(text("Sports, Reading, Music"));
+        $$(".table-responsive").findBy(text("Picture")).shouldHave(text("dog.jpg"));
+        $$(".table-responsive").findBy(text("Address")).shouldHave(text("test address living"));
+        $$(".table-responsive").findBy(text("State and City")).shouldHave(text("Uttar Pradesh Merrut"));
     }
 }
