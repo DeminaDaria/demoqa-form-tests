@@ -9,6 +9,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class StudentRegistrationFormTests {
+
     @BeforeAll
     static void beforeAll() {
         Configuration.browserSize = "1450х950";
