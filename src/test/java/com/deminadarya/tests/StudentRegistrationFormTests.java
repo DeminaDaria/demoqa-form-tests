@@ -34,7 +34,7 @@ public class StudentRegistrationFormTests {
         $("#hobbiesWrapper").$(byText("Reading")).click();
         $("#hobbiesWrapper").$(byText("Music")).click();
         $("input#uploadPicture").uploadFromClasspath("imj/dog.jpg");
-        $("#currentAddress").setValue("test address living").click();
+        $("#currentAddress").setValue("test address living");
         $("#state").click();
         $("#stateCity-wrapper").$(byText("Uttar Pradesh")).click();
         $("#react-select-4-input").setValue("Mer").pressTab();
