@@ -7,9 +7,11 @@ public class TestData {
             userEmail = "rog@test.com",
             gender = "Male",
             userNumber = "9874561230", subjectsInput = "biology",
-            hobbie1 = "Sports",
-            hobbie2 = "Sports",
-            hobbie3 = "Sports",
+            hobby1 = "Sports",
+            hobby2 = "Reading",
+            hobby3 = "Music",
             uploadPicture = "imj/dog.jpg",
-            currentAddress = "test address living", state = "Uttar Pradesh", city = "Mer";
+            currentAddress = "test address living",
+            state = "Uttar Pradesh",
+            city = "Agra";
 }

@@ -1,37 +1,33 @@
 package com.deminadarya.tests;
 
-import com.deminadarya.pages.components.CalendarComponent;
+import com.deminadarya.pages.RegistrationFormPage;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 import static com.deminadarya.tests.TestData.*;
 
 public class StudentRegistrationFormTests extends TestBase {
 
+    RegistrationFormPage registrationFormPage = new RegistrationFormPage();
+
     @Test
     void fillFormTest() {
-        open("/automation-practice-form");
+        registrationFormPage.openPage();
+        registrationFormPage.typeFirstName(firstName);
+        registrationFormPage.typeLastName(lastName);
+        registrationFormPage.typeEmail(userEmail);
+        registrationFormPage.genderChose(gender);
+        registrationFormPage.typeNumber(userNumber);
+        registrationFormPage.calendar.setDate("November", "1992", "14");
+        registrationFormPage.typeSubject(subjectsInput);
+        registrationFormPage.typeHobby(hobby1).typeHobby(hobby2).typeHobby(hobby3);
+        registrationFormPage.typePicture(uploadPicture);
+        registrationFormPage.typeAddress(currentAddress);
+        registrationFormPage.typeStateCity(state, city);
+        registrationFormPage.sendForm();
 
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
-        $("#userEmail").setValue(userEmail);
-        $("#genterWrapper").$(byText(gender)).click();
-        $("#userNumber").setValue(userNumber);
-        CalendarComponent calendarComponent = new CalendarComponent();
-        calendarComponent.setDate("November", "1992", "14");
-
-        $("#subjectsInput").setValue(subjectsInput).pressTab();
-        $("#hobbiesWrapper").$(byText(hobbie1)).click();
-        $("#hobbiesWrapper").$(byText(hobbie2)).click();
-        $("#hobbiesWrapper").$(byText(hobbie3)).click();
-        $("input#uploadPicture").uploadFromClasspath(uploadPicture);
-        $("#currentAddress").setValue(currentAddress);
-        $("#state").click();
-        $("#stateCity-wrapper").$(byText(state)).click();
-        $("#react-select-4-input").setValue(city).pressTab();
-        $("button#submit").click();
 
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         $(".table-responsive").shouldHave(text("Frogy Wings"));
