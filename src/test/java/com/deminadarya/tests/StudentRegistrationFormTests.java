@@ -1,36 +1,36 @@
 package com.deminadarya.tests;
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
+import com.deminadarya.pages.components.CalendarComponent;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static com.deminadarya.tests.TestData.*;
 
 public class StudentRegistrationFormTests extends TestBase {
 
     @Test
     void fillFormTest() {
         open("/automation-practice-form");
-        $("#firstName").setValue("Frogy");
-        $("#lastName").setValue("Wings");
-        $("#userEmail").setValue("rog@test.com");
-        $("#genterWrapper").$(byText("Male")).click();
-        $("#userNumber").setValue("9874561230");
-        $("input#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").selectOption("November");
-        $(".react-datepicker__year-select").selectOption("1992");
-        $$(".react-datepicker__week .react-datepicker__day").findBy(text("14")).click();
-        $("#subjectsInput").setValue("biology").pressTab();
-        $("#hobbiesWrapper").$(byText("Sports")).click();
-        $("#hobbiesWrapper").$(byText("Reading")).click();
-        $("#hobbiesWrapper").$(byText("Music")).click();
-        $("input#uploadPicture").uploadFromClasspath("imj/dog.jpg");
-        $("#currentAddress").setValue("test address living");
+
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
+        $("#userEmail").setValue(userEmail);
+        $("#genterWrapper").$(byText(gender)).click();
+        $("#userNumber").setValue(userNumber);
+        CalendarComponent calendarComponent = new CalendarComponent();
+        calendarComponent.setDate("November", "1992", "14");
+
+        $("#subjectsInput").setValue(subjectsInput).pressTab();
+        $("#hobbiesWrapper").$(byText(hobbie1)).click();
+        $("#hobbiesWrapper").$(byText(hobbie2)).click();
+        $("#hobbiesWrapper").$(byText(hobbie3)).click();
+        $("input#uploadPicture").uploadFromClasspath(uploadPicture);
+        $("#currentAddress").setValue(currentAddress);
         $("#state").click();
-        $("#stateCity-wrapper").$(byText("Uttar Pradesh")).click();
-        $("#react-select-4-input").setValue("Mer").pressTab();
+        $("#stateCity-wrapper").$(byText(state)).click();
+        $("#react-select-4-input").setValue(city).pressTab();
         $("button#submit").click();
 
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
