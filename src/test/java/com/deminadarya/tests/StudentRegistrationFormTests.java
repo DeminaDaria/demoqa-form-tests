@@ -1,16 +1,15 @@
 package com.deminadarya.tests;
 
+import com.deminadarya.pages.CheckResultPage;
 import com.deminadarya.pages.RegistrationFormPage;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 import static com.deminadarya.tests.TestData.*;
 
 public class StudentRegistrationFormTests extends TestBase {
 
     RegistrationFormPage registrationFormPage = new RegistrationFormPage();
+    CheckResultPage checkResultPage = new CheckResultPage();
 
     @Test
     void fillFormTest() {
@@ -28,14 +27,16 @@ public class StudentRegistrationFormTests extends TestBase {
         registrationFormPage.typeStateCity(state, city);
         registrationFormPage.sendForm();
 
-
-        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(text("Frogy Wings"));
-        $(".table-responsive").shouldHave(text("rog@test.com"), text("Male"), text("9874561230"), text("14 November,1992"));
-        $$(".table-responsive").findBy(text("Subjects")).shouldHave(text("Biology"));
-        $$(".table-responsive").findBy(text("Hobbies")).shouldHave(text("Sports, Reading, Music"));
-        $$(".table-responsive").findBy(text("Picture")).shouldHave(text("dog.jpg"));
-        $$(".table-responsive").findBy(text("Address")).shouldHave(text("test address living"));
-        $$(".table-responsive").findBy(text("State and City")).shouldHave(text("Uttar Pradesh Merrut"));
+        checkResultPage.checkModalTitle();
+        checkResultPage.checkResultsValue("Student Name", firstName + " " + lastName)
+                .checkResultsValue("Student Email", userEmail)
+                .checkResultsValue("Gender", gender)
+                .checkResultsValue("Mobile", userNumber)
+                .checkResultsValue("Date of Birth", "14 November,1992")
+                .checkResultsValue("Subjects", subjectsInput)
+                .checkResultsValue("Hobbies", hobby1 + ", " + hobby2 + ", " + hobby3)
+                .checkResultsValue("Picture", "dog.jpg")
+                .checkResultsValue("Address", currentAddress)
+                .checkResultsValue("State and City", state + " " + city);
     }
 }
