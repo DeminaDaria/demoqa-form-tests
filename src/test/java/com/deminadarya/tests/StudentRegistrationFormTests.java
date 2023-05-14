@@ -8,18 +8,11 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class StudentRegistrationFormTests {
-
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.browserSize = "1450х950";
-        Configuration.holdBrowserOpen = true;
-        Configuration.pageLoadTimeout = 600000;
-    }
+public class StudentRegistrationFormTests extends TestBase {
 
     @Test
     void fillFormTest() {
-        open("https://demoqa.com/automation-practice-form");
+        open("/automation-practice-form");
         $("#firstName").setValue("Frogy");
         $("#lastName").setValue("Wings");
         $("#userEmail").setValue("rog@test.com");
