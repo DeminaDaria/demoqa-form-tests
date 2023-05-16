@@ -24,7 +24,7 @@ public class StudentRegistrationFormTests extends TestBase {
         registrationFormPage.typeEmail(testData.getUserEmail());
         registrationFormPage.genderChose(testData.getGender());
         registrationFormPage.typeNumber(testData.getUserNumber());
-        registrationFormPage.calendar.setDate("November", "1992", "14");
+        registrationFormPage.calendar.setDate(testData.getMonth(), testData.getYear(), testData.getDay());
         registrationFormPage.typeSubject(testData.getSubject());
         registrationFormPage.typeHobby(testData.getHobby());
         registrationFormPage.typePicture(testData.getUploadPicture());
@@ -38,7 +38,7 @@ public class StudentRegistrationFormTests extends TestBase {
                 .checkResultsValue("Student Email", testData.getUserEmail())
                 .checkResultsValue("Gender", testData.getGender())
                 .checkResultsValue("Mobile", testData.getUserNumber())
-                .checkResultsValue("Date of Birth", "14 November,1992")
+                .checkResultsValue("Date of Birth", testData.getDay() + " " + testData.getMonth() + "," + testData.getYear())
                 .checkResultsValue("Subjects", testData.getSubject())
                 .checkResultsValue("Hobbies", testData.getHobby())
                 .checkResultsValue("Picture", "dog.jpg")

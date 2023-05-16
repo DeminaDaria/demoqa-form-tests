@@ -19,6 +19,21 @@ public class TestData {
     private String currentAddress;
     private String state;
     private String city;
+    private String year;
+    private String month;
+    private String day;
+
+    public String getYear() {
+        return year;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public String getDay() {
+        return day;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -76,6 +91,9 @@ public class TestData {
         currentAddress = faker.address().streetAddress();
         state = getRandomState();
         city = getRandomCity();
+        month = faker.options().option("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+        year = String.valueOf(faker.number().numberBetween(1900, 2023));
+        day = String.valueOf(faker.number().numberBetween(1, 28));
     }
 
     private String getRandomGender() {
